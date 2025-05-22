@@ -14,6 +14,7 @@ http://localhost:5050/analyze
   - `prompt`: A string containing a description or context (required)
  
 An example request: 
+```python
 import requests
 import io
 
@@ -26,12 +27,13 @@ data = {
 
 response = requests.post("http://localhost:5050/analyze", files=files, data=data)
 print(response.json())
-
+```
 
 ## How to Programmatically Receive Data
 Once your `POST` request is sent to the microservice, it will return a **JSON** response containing the analysis.
 
 ### Expected JSON Response Format
+```json
 {
   "disease_detected": "Powdery Mildew",
   "confidence": "93%",
@@ -42,8 +44,10 @@ Once your `POST` request is sent to the microservice, it will return a **JSON** 
   ],
   "plant_health": "65%"
 }
+```
 
 Example code to recieve and use the data:
+```python
 response = requests.post(url, files=files, data=data)
 
 if response.status_code == 200:
@@ -55,4 +59,6 @@ if response.status_code == 200:
     print("Health:", result['plant_health'])
 else:
     print("Error:", response.status_code)
+```
     
+![Plant Disease Microservice Sequence Diagram](uml_sequence.png)
